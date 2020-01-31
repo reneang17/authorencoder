@@ -1,3 +1,3 @@
-![library.](./media/library_panoramic.png)
+![library.](./media/library_panoramic.jpg)
 # Authorencoder
 
