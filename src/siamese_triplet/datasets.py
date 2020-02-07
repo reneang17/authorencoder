@@ -1,10 +1,11 @@
 import numpy as np
 
-
+import torch
 from torch.utils.data import Dataset
 from torch.utils.data.sampler import BatchSampler
 
-
+import pickle
+import os
 
 class BalancedBatchSampler(BatchSampler):
     """
@@ -44,3 +45,25 @@ class BalancedBatchSampler(BatchSampler):
 
     def __len__(self):
         return self.n_dataset // self.batch_size
+    
+    
+
+
+def data_to_Iterator(data_dir, file_name, n_classes=10, n_samples=10, sampler= True):
+
+    with open(os.path.join(data_dir, file_name) , 'rb') as f:
+        data, labels = pickle.load(f)
+        
+    data = [torch.LongTensor(i) for i in data]
+    data_tensor = torch.stack(data)
+    labels_tensor= torch.Tensor(labels)
+    tensordataset = torch.utils.data.TensorDataset(data_tensor, labels_tensor)
+    
+    if sampler:
+        Batch_sampler = BalancedBatchSampler(labels_tensor, n_classes=10, n_samples=10)
+        Loader=torch.utils.data.DataLoader(tensordataset, sampler=Batch_sampler, pin_memory=True)
+    else:
+        Loader=torch.utils.data.DataLoader(tensordataset, pin_memory=True)
+    return Loader 
+    
+
