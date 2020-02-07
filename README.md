@@ -9,3 +9,5 @@ Would it be great if,  after reading a touching poem, we could find authors who 
 
 ## How do you use the AuthorEncoder?
 
+
+![](./media/how_it_works.gif)

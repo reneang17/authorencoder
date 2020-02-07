@@ -41,7 +41,7 @@ class CNN(nn.Module):
 
     def forward(self, text):
         #text = [1, batch size, sent len]
-        text = text.squeeze()
+        text = text.squeeze(0)
         #text = [batch size, sent len]
         embedded = self.embedding(text)
         #embedded = [batch size, sent len, emb dim]

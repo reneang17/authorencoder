@@ -80,4 +80,4 @@ for i in range(len(_df)):
 
 author_dict = {j:i for i,j in enumerate(df_longest10.author.unique())}
 df_longest10['author_label'] = df_longest10.author.apply(lambda x: author_dict[x])
-df_longest10.drop(columns= ['author', 'title']).to_json(process_dir+'longest_poems.json', orient='records', lines=True)
+df_longest10.drop(columns= ['author', 'title']).to_json(process_dir+'longest10.json', orient='records', lines=True)
