@@ -27,10 +27,7 @@ def model_fn(model_dir):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     
     #**********************************    
-    # Load the saved word_dict.
-    word_dict_path = os.path.join(model_dir, 'word_dict.pkl')
-    with open(word_dict_path, 'rb') as f:
-        word_dict = pickle.load(f)
+    # Load model
     
     INPUT_DIM = model_info['INPUT_DIM']
     WORD_EMBEDDING_DIM = model_info['WORD_EMBEDDING_DIM']  
@@ -43,13 +40,6 @@ def model_fn(model_dir):
     
     
     model = CNN(INPUT_DIM, WORD_EMBEDDING_DIM, N_FILTERS, FILTER_SIZES, AUTHOR_DIM, DROPOUT, PAD_IDX)
-
-    # Load the stored model parameters.
-    model_path = os.path.join(model_dir, 'model_state.pt')
-    with open(model_path, 'rb') as f:
-        model.load_state_dict(torch.load(f))
-    
-    model.word_dict = word_dict
     
 
     print("Model loaded with embedding_dim {}, vocab_size {}.".format(
@@ -129,6 +119,9 @@ if __name__ == '__main__':
     
     print("Using device {}.".format(device))
 
+    
+
+    
     torch.manual_seed(args.seed)
 
     #data, embedding, word_dict files names.
@@ -152,9 +145,7 @@ if __name__ == '__main__':
     with open(os.path.join(args.data_dir, file_embedding), 'rb') as f:
         vocab_vectors = pickle.load(f)
     
-    print("vocab_vectors tyepe {}, size{}".format(type(vocab_vectors), len(vocab_vectors) ))
-    print(vocab_vectors[0])
-    print('Done loading embedding and dict')
+    
     
     vocab_vectors = torch.tensor(vocab_vectors)
     
@@ -225,6 +216,14 @@ if __name__ == '__main__':
         print("model_info: {}".format(model_info))
         torch.save(model_info, f)
 
+    
+    with open(os.path.join(args.data_dir, file_tokenized_train_data) , 'rb') as f:
+        data_set = pickle.load(f)
+        
+    training_set_path = os.path.join(args.model_dir, 'training_set.pkl')
+    with open(training_set_path, 'wb') as f:
+        pickle.dump(data_set, f)
+    
     #Save the trained vocab embedding
     word_dict_path = os.path.join(args.model_dir, 'word_dict.pkl')
     with open(word_dict_path, 'wb') as f:

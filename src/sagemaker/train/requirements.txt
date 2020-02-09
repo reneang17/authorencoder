@@ -1,5 +1,2 @@
-pandas
-numpy
+scikit-learn
 nltk
-beautifulsoup4
-html5lib

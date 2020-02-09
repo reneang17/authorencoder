@@ -10,7 +10,7 @@ SEED = 1234
 
 
 data_dir = '../data/processed/'
-data_name = 'longest10.json'
+data_name = 'top_10_authors.json'
 prefix = data_name[:-5]
 FIX_WORD_LENGTH = 101
 MAX_VOCAB_SIZE = 20_000
