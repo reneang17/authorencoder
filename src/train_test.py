@@ -35,7 +35,7 @@ def model_fn(model_dir):
     PAD_IDX = model_info['PAD_IDX']
     #UNK_IDX = 0
 
-
+    print(model_info)
     model = CNN(INPUT_DIM, WORD_EMBEDDING_DIM, N_FILTERS, FILTER_SIZES, \
     AUTHOR_DIM, DROPOUT, PAD_IDX)
     print("Model loaded with embedding_dim {}, vocab_size {}.".format(
@@ -57,7 +57,7 @@ def model_fn(model_dir):
     model.to(device).eval()
 
     print("Done loading model.")
-    return model
+    return model, model_info['TRAIN_HISTORY']
 
 if __name__ == '__main__':
 
@@ -75,7 +75,7 @@ if __name__ == '__main__':
                         help='random seed (default: 1)')
     parser.add_argument('--dropout', type=float, default=0.5,
                         help='dropout parameter')
-    parser.add_argument('--lr', type=float, default=5e-3,
+    parser.add_argument('--lr', type=float, default=4e-3,
                         help='learning rate')
     parser.add_argument('--margin', type=float, default=0.24,
                         help='triplet loss margin')
@@ -88,7 +88,7 @@ if __name__ == '__main__':
     parser.add_argument('--model_dir', type=dir_path, default = './trained_models/',
                         help='Dir for weights and model settings')
     parser.add_argument('--data_file', type=str,
-                           default = 'top_10_authors.json',
+                           default = 'top10.json',#'top_10_authors.json',
                            help='data file name')
     args = parser.parse_args()
 
@@ -136,7 +136,7 @@ if __name__ == '__main__':
     DROPOUT = args.dropout
     PAD_IDX = 1
     #UNK_IDX = 0
-    print(WORD_EMBEDDING_DIM)
+
     model = CNN(INPUT_DIM, WORD_EMBEDDING_DIM, N_FILTERS, FILTER_SIZES, AUTHOR_DIM, DROPOUT, PAD_IDX)
 
     #Load word dictionary
@@ -171,7 +171,7 @@ if __name__ == '__main__':
 
     # training
     is_cuda_available= False
-    simplified_fit(train_Loader, valid_Loader, MODEL, loss_fn, optimizer, N_EPOCHS, \
+    train_history = simplified_fit(train_Loader, valid_Loader, MODEL, loss_fn, optimizer, N_EPOCHS, \
                    is_cuda_available, metrics=[AverageNonzeroTripletsMetric()])
 
     #Save the parameters used to construct the model
@@ -184,7 +184,10 @@ if __name__ == '__main__':
             'FILTER_SIZES' : FILTER_SIZES,
             'AUTHOR_DIM' : AUTHOR_DIM,
             'DROPOUT' : DROPOUT,
-            'PAD_IDX' : PAD_IDX
+            'PAD_IDX' : PAD_IDX,
+            'TRAIN_HISTORY':train_history,
+            'LR':LR,
+            'MARGIN':MARGIN
         }
         print("model_info: {}".format(model_info))
         torch.save(model_info, f)

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import pandas as pd
-from utils import *
+from utils import poem_fragments, wspace_schars
 
 
 
@@ -22,7 +22,7 @@ df = pd.read_csv(data_dir + data_file,index_col=0)
 
 df['content'] = df.content.apply(lambda x: wspace_schars(x,
                 chars_to_keep=".,'\n?!",
-                no_white_space = False, no_newlines= False))
+                no_white_space = True, no_newlines= True))
 
 
 #Keeping authors which have at les

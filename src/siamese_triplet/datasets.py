@@ -7,6 +7,8 @@ from torch.utils.data.sampler import BatchSampler
 import pickle
 import os
 
+np.random.seed(1234)
+
 class BalancedBatchSampler(BatchSampler):
     """
     BatchSampler - from a MNIST-like dataset, samples n_classes and within these classes samples n_samples.
@@ -47,8 +49,6 @@ class BalancedBatchSampler(BatchSampler):
         return self.n_dataset // self.batch_size
     
     
-
-
 def data_to_Iterator(data_dir, file_name, n_classes=10, n_samples=10, sampler= True):
 
     with open(os.path.join(data_dir, file_name) , 'rb') as f:

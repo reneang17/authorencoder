@@ -60,14 +60,14 @@ class CNN(nn.Module):
 
 
 class RNN(nn.Module):
-    def __init__(self, vocab_size, embedding_dim, hidden_dim, output_dim, n_layers, 
+    def __init__(self, vocab_size, embedding_dim, hidden_dim, output_dim, n_layers,
                  bidirectional, dropout, pad_idx):
         super().__init__()
         self.embedding = nn.Embedding(vocab_size, embedding_dim, padding_idx = pad_idx)
-        self.rnn = nn.LSTM(embedding_dim, 
-                           hidden_dim, 
-                           num_layers=n_layers, 
-                           bidirectional=bidirectional, 
+        self.rnn = nn.LSTM(embedding_dim,
+                           hidden_dim,
+                           num_layers=n_layers,
+                           bidirectional=bidirectional,
                            dropout=dropout)
         self.fc = nn.Linear(hidden_dim * 2, output_dim)
         self.dropout = nn.Dropout(dropout)
@@ -88,19 +88,18 @@ class RNN(nn.Module):
 
         #output = [sent len, batch size, hid dim * num directions]
         #output over padding tokens are zero tensors
-        
+
         #hidden = [num layers * num directions, batch size, hid dim]
         #cell = [num layers * num directions, batch size, hid dim]
-        
+
         #concat the final forward (hidden[-2,:,:]) and backward (hidden[-1,:,:]) hidden layers
         #and apply dropout
-        
+
         hidden = self.dropout(torch.cat((hidden[-2,:,:], hidden[-1,:,:]), dim = 1))
-                
+
         #hidden = [batch size, hid dim * num directions]
-            
+
         return self.fc(hidden)
 
     def get_embedding(self, x):
         return self.forward(x)
-
