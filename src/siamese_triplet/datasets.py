@@ -1,3 +1,8 @@
+#Within the present repo, this is a modified version 
+#of the computer vision repo https://github.com/adambielski/siamese-triplet
+#by Adam Bielski
+
+
 import numpy as np
 
 import torch
