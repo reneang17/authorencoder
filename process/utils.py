@@ -11,7 +11,7 @@ def wspace_schars(review, chars_to_keep=".,'\n" , no_white_space = True,
     for i in chars_to_keep:
         to_keep+= i+'|'
 
-    rep_special_chars= re.compile("[^\w\n|"+ (to_keep[:-1])+ "]|_")
+    rep_special_chars= re.compile("[^\w'|"+ (to_keep[:-1])+ "]|_")
 
     # Subs special chars by white space except chars_to_keep
     text=rep_special_chars.sub(' ', review)
@@ -36,8 +36,8 @@ def poem_fragments(poem_series, split_into):
     poem_pa= poem.content.split('.\n')
     i=0
     while ((i+1)!=(len(poem_pa))):
-        if not (len(poem_pa[i].split())<split_into):
-            if poem_pa[i][-1]!='.': poem_pa[i]=poem_pa[i]+'.'
+        if (len(poem_pa[i].split())>=split_into):
+            poem_pa[i]=poem_pa[i]+'.\n'
             #print('FINAL')
             #print(poem_pa[i])
             i+=1

@@ -1,3 +1,8 @@
+#Within the present repo, this is a modified version 
+#of the computer vision repo https://github.com/adambielski/siamese-triplet
+#by Adam Bielski
+
+
 import numpy as np
 
 import torch
@@ -6,6 +11,8 @@ from torch.utils.data.sampler import BatchSampler
 
 import pickle
 import os
+
+np.random.seed(1234)
 
 class BalancedBatchSampler(BatchSampler):
     """
@@ -47,8 +54,6 @@ class BalancedBatchSampler(BatchSampler):
         return self.n_dataset // self.batch_size
     
     
-
-
 def data_to_Iterator(data_dir, file_name, n_classes=10, n_samples=10, sampler= True):
 
     with open(os.path.join(data_dir, file_name) , 'rb') as f:

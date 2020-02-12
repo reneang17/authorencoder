@@ -1,7 +1,29 @@
+#Within the present repo, this is a modified version 
+#of the computer vision repo https://github.com/adambielski/siamese-triplet
+#by Adam Bielski
+
+
 import torch
 import numpy as np
+from sklearn.neighbors import KNeighborsClassifier as KNC
 
+def extract_embeddings(dataloader, model, emb_dim=2):
+    with torch.no_grad():
+        model.eval()
+        embeddings = np.zeros((len(dataloader.dataset), emb_dim))
+        labels = np.zeros(len(dataloader.dataset))
+        k = 0
+        for poems, target in dataloader:
+            poems = poems.squeeze()
+            poems_le= len(poems)
+            #if is_cuda:
+            #    poems = poems.cuda()
 
+            embeddings[k:k+poems_le] = model.forward(poems).data.cpu().numpy()
+
+            labels[k:k+poems_le] = target.numpy()
+            k += poems_le
+    return embeddings, labels
 
 
 def simplified_fit(train_loader, val_loader, model, loss_fn, optimizer, n_epochs, is_cuda_available, metrics=[],
@@ -9,6 +31,8 @@ def simplified_fit(train_loader, val_loader, model, loss_fn, optimizer, n_epochs
     """
     TODO
     """
+    train_list = []
+    valid_list = []
     log_interval = len(train_loader)//2
     if scheduler != None:
         for epoch in range(0, start_epoch):
@@ -20,20 +44,30 @@ def simplified_fit(train_loader, val_loader, model, loss_fn, optimizer, n_epochs
 
         # Train stage
         train_loss, _metrics = train_epoch(train_loader, model, loss_fn, optimizer, is_cuda_available, log_interval, metrics)
+        #train_list.append(train_loss)
         message = 'Epoch: {}/{}. Train set: Average loss: {:.4f}'.format(epoch + 1, n_epochs, train_loss)
         for metric in _metrics:
             message += '\t{}: {}'.format(metric.name(), metric.value())
+        #train_embeddings_otl, train_labels_otl = extract_embeddings(train_loader, model)
+        #KNN = KNC(n_neighbors=3)
+        #KNN.fit(train_embeddings_otl, train_labels_otl)
+        #train_list.append(KNN.score(train_embeddings_otl,train_labels_otl))
+
+
 
         # Validation stage
         if val_loader != None:
-
             val_loss, _metrics = test_epoch(val_loader, model, loss_fn, is_cuda_available, metrics)
             val_loss /= len(val_loader)
+            #valid_list.append(val_loss)
             message += '\nEpoch: {}/{}. Validation set: Avg loss: {:.4f}'.format(epoch + 1, n_epochs,val_loss)
             for metric in _metrics:
                 message += '\t{}: {}'.format(metric.name(), metric.value())
-
+            #valid_embeddings_otl, valid_labels_otl = extract_embeddings(val_loader, model)
+            #valid_list.append(KNN.score(valid_embeddings_otl,valid_labels_otl))
         print(message)
+
+    return (train_list, valid_list)
 
 
 
