@@ -14,11 +14,8 @@ Would it be great if,  after reading a touching poem, we could find authors who 
 
 ## About used data
 
-The data to training this model can be found on 
-[John Hallman repo](https://github.com/johnhallman/poem-data-processing)
-
-which to my understanding contains the larger 
-[poetryfoundation.org](poetryfoundation.org)
+The data to training this model can be found on [John Hallman repo](https://github.com/johnhallman/poem-data-processing) which to my understanding contains the larger [poetryfoundation.org](poetryfoundation.org). The required wrangling can be found on 
+wrangling and EDA. 
 
 ## Requirements 
 
