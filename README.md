@@ -11,3 +11,16 @@ Would it be great if,  after reading a touching poem, we could find authors who 
 
 
 ![](./media/how_it_works.gif)
+
+## About used data
+
+The data to training this model can be found on 
+[John Hallman repo](https://github.com/johnhallman/poem-data-processing)
+
+which to my understanding contains the larger 
+[poetryfoundation.org](poetryfoundation.org)
+
+## Requirements 
+
+Appart from the requirements.txt, follow the instructions on [here](https://spacy.io/usage)
+to install spaCy. 
