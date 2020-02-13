@@ -11,10 +11,6 @@ Would it be great if,  after reading a touching poem, we could find authors who 
 Tipically, recomendation systems are based on what other people like. Instead, AuthorEncoder makes recomendations based on 
 on the poems themselfs. How is this possible? you might be asking. The answer is bringing the triple tecnique of [FaceNet: A Unified Embedding for Face Recognition and Clustering](https://arxiv.org/abs/1503.03832) to natural language processing. Precisely, we wrangle and process poems, which are them used to build an authorencoder that multiple authors, which in turn can be used to give recomendation once the embedding itself. Run the main file to build this project yourself. 
 
-## More on technique and accuracy?
-
-The present encoder is build with the 10 authors which produces the larges corpus of poems. 
-
 ## AuthorEncoder in action
 
 ![](./media/how_it_works.gif)
@@ -28,3 +24,7 @@ wrangling and EDA.
 
 Appart from the requirements.txt, follow the instructions on [here](https://spacy.io/usage)
 to install spaCy. 
+
+## Current results and metrics
+
+The present encoder is build with the 10 authors which produces the larges corpus of poems. 
