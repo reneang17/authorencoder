@@ -63,12 +63,12 @@ def data_to_Iterator(data_dir, file_name, n_classes=10, n_samples=10, sampler= T
     data_tensor = torch.stack(data)
     labels_tensor= torch.Tensor(labels)
     tensordataset = torch.utils.data.TensorDataset(data_tensor, labels_tensor)
-    
+        
     if sampler:
         Batch_sampler = BalancedBatchSampler(labels_tensor, n_classes=10, n_samples=10)
         Loader=torch.utils.data.DataLoader(tensordataset, sampler=Batch_sampler, pin_memory=True)
     else:
-        Loader=torch.utils.data.DataLoader(tensordataset, pin_memory=True)
+        Loader=torch.utils.data.DataLoader(tensordataset, pin_memory=True, batch_size=100)
     return Loader 
     
 
