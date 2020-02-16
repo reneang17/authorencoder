@@ -70,6 +70,12 @@ TRAIN_VALID_RATIO =args.train_valid_ratio
 
 #************************************************************
 
+if not os.path.exists(data_dir): # Make sure that the folder exists
+    os.makedirs(data_dir)
+    print('Created: ', data_dir)
+else:
+    print('Process dir already exist', data_dir)
+
 
 assert  train_data_file[-11:]== '_train.json'
 

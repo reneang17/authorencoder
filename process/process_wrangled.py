@@ -66,6 +66,12 @@ MAX_AUTHORS = args.max_authors
 MIN_AUTHORS = args.min_authors
 SEED = args.seed
 
+if not os.path.exists(process_dir): # Make sure that the folder exists
+    os.makedirs(process_dir)
+    print('Created: ', process_dir)
+else:
+    print('Process dir already exist', process_dir)
+
 if MIN_AUTHORS == 0:
     dump_train_data = 'top'+str(MAX_AUTHORS)+'_train_.json'
     dump_test_data = 'top'+str(MAX_AUTHORS)+'_test_.json'
