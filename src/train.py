@@ -8,6 +8,13 @@ import numpy as np
 import torch
 from models import CNN
 
+#************************************************************
+#                   About this scrip                        #
+# Use this file to use the already tokenized poems and      #
+# embedding to run models uptimized on triplet loss.        #
+# Then you can explore the results on results.ipynb            #
+#************************************************************
+
 def model_fn(model_dir):
     """Load the PyTorch model from the `model_dir` directory."""
     print("Loading model.")
@@ -35,12 +42,12 @@ def model_fn(model_dir):
     PAD_IDX = model_info['PAD_IDX']
     #UNK_IDX = 0
 
-    print(model_info)
+    #print(model_info)
     model = CNN(INPUT_DIM, WORD_EMBEDDING_DIM, N_FILTERS, FILTER_SIZES, \
     AUTHOR_DIM, DROPOUT, PAD_IDX)
-    print("Model loaded with embedding_dim {}, vocab_size {}.".format(
+    #print("Model loaded with embedding_dim {}, vocab_size {}.".format(
     #    args.embedding_dim, args.hidden_dim, args.vocab_size
-         WORD_EMBEDDING_DIM, INPUT_DIM))
+    #     WORD_EMBEDDING_DIM, INPUT_DIM))
 
     #**********************************
 
