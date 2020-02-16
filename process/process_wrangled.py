@@ -73,11 +73,11 @@ else:
     print('Process dir already exist', process_dir)
 
 if MIN_AUTHORS == 0:
-    dump_train_data = 'top'+str(MAX_AUTHORS)+'_train_.json'
-    dump_test_data = 'top'+str(MAX_AUTHORS)+'_test_.json'
+    dump_train_data = 'top'+str(MAX_AUTHORS)+'_train.json'
+    dump_test_data = 'top'+str(MAX_AUTHORS)+'_test.json'
 elif MIN_AUTHORS >0:
-    dump_train_data= 'top'+str(MAX_AUTHORS)+'_'+str(MIN_AUTHORS)+'_train_.json'
-    dump_test_data= 'top'+str(MAX_AUTHORS)+'_'+str(MIN_AUTHORS)+'_test_.json'
+    dump_train_data= 'top'+str(MAX_AUTHORS)+'_'+str(MIN_AUTHORS)+'_train.json'
+    dump_test_data= 'top'+str(MAX_AUTHORS)+'_'+str(MIN_AUTHORS)+'_test.json'
 
 
 data_path = os.path.join(data_dir,data_file)
