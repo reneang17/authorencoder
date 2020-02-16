@@ -32,10 +32,10 @@ parser.add_argument('--data_dir', type=dir_path, default = '../data/processed/',
                         help="dir of data (default: ../data/wrangled/)")
 
 parser.add_argument('--train_data_file', type=str, default = 'top10_train.json',
-                        help="train data file (default: top10_train_.json)")
+                        help="train data file (default: top10_train.json)")
 
 parser.add_argument('--test_data_file', type=str, default = 'top10_test.json',
-                        help="test data file (default: top10_test_.json)")
+                        help="test data file (default: top10_test.json)")
 
 parser.add_argument('--word_length', type=int, default=101,
                         help='word_lenght to cut and pad poem extracts (default: 101)')
