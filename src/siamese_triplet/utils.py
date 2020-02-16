@@ -8,6 +8,22 @@ from itertools import combinations
 import numpy as np
 import torch
 
+def extract_embeddings(dataloader, model, emb_dim, is_cuda=False):
+    with torch.no_grad():
+        model.eval()
+        embeddings = np.zeros((len(dataloader.dataset), emb_dim))
+        labels = np.zeros(len(dataloader.dataset))
+        k = 0
+        for poems, target in dataloader:
+            poems = poems.squeeze()
+            poems_le= len(poems)
+            if is_cuda:
+                poems = poems.cuda()
+
+            embeddings[k:k+poems_le] = model.get_embedding(poems).data.cpu().numpy()
+            labels[k:k+poems_le] = target.numpy()
+            k += poems_le
+    return embeddings, labels
 
 def pdist(vectors):
     distance_matrix = -2 * vectors.mm(torch.t(vectors)) + vectors.pow(2).sum(dim=1).view(1, -1) + vectors.pow(2).sum(

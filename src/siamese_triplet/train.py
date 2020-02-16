@@ -5,25 +5,8 @@
 
 import torch
 import numpy as np
+import numpy
 from sklearn.neighbors import KNeighborsClassifier as KNC
-
-def extract_embeddings(dataloader, model, emb_dim=2):
-    with torch.no_grad():
-        model.eval()
-        embeddings = np.zeros((len(dataloader.dataset), emb_dim))
-        labels = np.zeros(len(dataloader.dataset))
-        k = 0
-        for poems, target in dataloader:
-            poems = poems.squeeze()
-            poems_le= len(poems)
-            #if is_cuda:
-            #    poems = poems.cuda()
-
-            embeddings[k:k+poems_le] = model.forward(poems).data.cpu().numpy()
-
-            labels[k:k+poems_le] = target.numpy()
-            k += poems_le
-    return embeddings, labels
 
 
 def simplified_fit(train_loader, val_loader, model, loss_fn, optimizer, n_epochs, is_cuda_available, metrics=[],
@@ -44,14 +27,10 @@ def simplified_fit(train_loader, val_loader, model, loss_fn, optimizer, n_epochs
 
         # Train stage
         train_loss, _metrics = train_epoch(train_loader, model, loss_fn, optimizer, is_cuda_available, log_interval, metrics)
-        #train_list.append(train_loss)
         message = 'Epoch: {}/{}. Train set: Average loss: {:.4f}'.format(epoch + 1, n_epochs, train_loss)
         for metric in _metrics:
             message += '\t{}: {}'.format(metric.name(), metric.value())
-        #train_embeddings_otl, train_labels_otl = extract_embeddings(train_loader, model)
-        #KNN = KNC(n_neighbors=3)
-        #KNN.fit(train_embeddings_otl, train_labels_otl)
-        #train_list.append(KNN.score(train_embeddings_otl,train_labels_otl))
+            train_list.append(metric.value())
 
 
 
@@ -59,13 +38,11 @@ def simplified_fit(train_loader, val_loader, model, loss_fn, optimizer, n_epochs
         if val_loader != None:
             val_loss, _metrics = test_epoch(val_loader, model, loss_fn, is_cuda_available, metrics)
             val_loss /= len(val_loader)
-            #valid_list.append(val_loss)
             message += '\nEpoch: {}/{}. Validation set: Avg loss: {:.4f}'.format(epoch + 1, n_epochs,val_loss)
             for metric in _metrics:
                 message += '\t{}: {}'.format(metric.name(), metric.value())
-            #valid_embeddings_otl, valid_labels_otl = extract_embeddings(val_loader, model)
-            #valid_list.append(KNN.score(valid_embeddings_otl,valid_labels_otl))
-        print(message)
+                valid_list.append(metric.value())
+        
 
     return (train_list, valid_list)
 
@@ -80,6 +57,7 @@ def train_epoch(train_loader, model, loss_fn, optimizer, is_cuda_available, log_
 
     model.train()
     losses = []
+    outs=[];targs=[]
     total_loss = 0
 
     for batch_idx, (data, target) in enumerate(train_loader):
@@ -94,7 +72,6 @@ def train_epoch(train_loader, model, loss_fn, optimizer, is_cuda_available, log_
 
         optimizer.zero_grad()
         outputs = model(*data)
-
         if type(outputs) not in (tuple, list):
             outputs = (outputs,)
 
@@ -121,21 +98,23 @@ def train_epoch(train_loader, model, loss_fn, optimizer, is_cuda_available, log_
 
             print(message)
             losses = []
-
     total_loss /= (batch_idx + 1)
     return total_loss, metrics
-
 
 def test_epoch(val_loader, model, loss_fn, is_cuda_available, metrics):
     """
     TODO
     """
+    outs=[];targs=[]
+
     with torch.no_grad():
         for metric in metrics:
             metric.reset()
         model.eval()
         val_loss = 0
-        for batch_idx, (data, target) in enumerate(val_loader):
+        for (data, target) in val_loader:
+            
+
             target = target if len(target) > 0 else None
             if not type(data) in (tuple, list):
                 data = (data,)
@@ -145,6 +124,8 @@ def test_epoch(val_loader, model, loss_fn, is_cuda_available, metrics):
                     target = target.cuda()
 
             outputs = model(*data)
+            outs.append(outputs.detach())
+            targs.append(target.detach())
 
             if type(outputs) not in (tuple, list):
                 outputs = (outputs,)
@@ -156,7 +137,6 @@ def test_epoch(val_loader, model, loss_fn, is_cuda_available, metrics):
             loss_outputs = loss_fn(*loss_inputs)
             loss = loss_outputs[0] if type(loss_outputs) in (tuple, list) else loss_outputs
             val_loss += loss.item()
-
             for metric in metrics:
                 metric(outputs, target, loss_outputs)
 
