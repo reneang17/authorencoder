@@ -20,12 +20,12 @@ on the poems themselfs. How is this possible? you might be asking. The answer is
 The data to training this model can be found on [John Hallman repo](https://github.com/johnhallman/poem-data-processing) which to my understanding contains the larger [poetryfoundation.org](poetryfoundation.org). The required wrangling can be found on 
 wrangling and EDA. 
 
-## Requirements 
+## Quick start
 
-Appart from the requirements.txt, follow the instructions on [here](https://spacy.io/usage)
-to install spaCy. 
+Use the docker file in the build folder, execute run_pipeline and go to /src/results.ipynb to 
+see results and work locally.
 
-## Current results and metrics
+## Performance
 
 The present encoder is build with the 10 authors which produces the larges corpus of poems. 
 
@@ -77,7 +77,13 @@ processing_wrangle.py takes clean data and
 | --model_dir |  Dir for weights and model settings | ./trained_models/ | 
 | --data_file | data file name | top_10_authors.json |
 
-## Acknowledgements
+## References
 
-The autoencoder is modified based on git repo of [blackecho](https://gist.github.com/blackecho/3a6e4d512d3aa8aa6cf9) and [Leavingseason](https://github.com/Leavingseason/rnn_recsys)  
-Triplet online mining is referred from this [github](https://github.com/omoindrot/tensorflow-triplet-loss)
+FaceNet: A Unified Embedding for Face Recognition and Clustering (https://arxiv.org/pdf/1503.03832.pdf)
+The triplet loss tools used are based on [Adam Bielski](https://github.com/adambielski/siamese-triplet) 
+pytorch implementation of triplet loss.
+The best performing model is an implementation of [CNN for sentence classification](https://arxiv.org/abs/1408.5882)
+
+
+
+
