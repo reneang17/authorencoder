@@ -46,8 +46,8 @@ parser.add_argument('--word_length', type=int, default=101,
 parser.add_argument('--max_vocab_size', type=int, default = 20000,
                         help="max number of words in vocab  (default: 20_000)")
 
-parser.add_argument('--train_valid_ratio', type=float, default = 0.9,
-                        help="ratio train valid  (default: 0.9)")
+parser.add_argument('--train_valid_ratio', type=float, default = 0.7,
+                        help="ratio train valid  (default: 0.7)")
 
 parser.add_argument('--seed', type=int, default = 1234,
                         help="Seed for replicability (default: 1234)")
