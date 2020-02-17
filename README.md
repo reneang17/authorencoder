@@ -30,62 +30,42 @@ to install spaCy.
 The present encoder is build with the 10 authors which produces the larges corpus of poems. 
 
 ---
-## Parameter
+## Parameters process poems
 
 processing_wrangle.py takes clean data and 
 
 | Parameter  | Description | Default |
 | ------------- | ------------- | ------------- |
-
 |--data_dir | dir of wrangled data to process|../data/wrangled/ | 
-
 |--data_file | wrangled data-file to process | wrangled_data.csv | 
-
 |--process_dir | dir to dump processed data | ../data/processed/| 
-
 |--split_into | max words per poem extract |100 |
-
 |--min_words_per_author | Author min corpus word length | 2500 |
-
 |--chars_to_keep | chars to keep  | \n?! |
-
 |--no_white_space | Remove multiple white space | True |
-
 |--no_newlines | bool | Remove multiple new lines | True |
-
 |--max_authors | Keep authors with larges corpus | 10 |
-
 |--min_authors | Larges corpus starting from author | 0 |
-
 |--train_test_ratio | Train test ratio | 0.9 |
-
 |--seed | Seed for replicability | 1234 |
 
-
-Create word embedding, dictionary and tokenize poems
+## Parameters create word embedding, dictionary and tokenize poems
 
 | Parameter  | Description | Default |
 | ------------- | ------------- | ------------- |
-
 | --data_dir | dir of data | ../data/wrangled/ |
-
 | --train_data_file | train data file | top10_train.json | 
-
 | --test_data_file' | test data file | top10_test.json |
-
 | --word_length | word_lenght to cut and pad poem extracts | 101 |
-
 | --max_vocab_size | max number of words in vocab  | 20_000 |
-
 | --train_valid_ratio | ratio train valid  | 0.9 |
-
 | --seed | Seed for replicability | 1234 |
 
-Modeling
+
+## Parameters modelling
 
 | Parameter  | Description | Default |
 | ------------- | ------------- | ------------- |
-
 | --epochs | number of epochs to train  | 20 |
 | --seed | random seed | 1 |
 | --dropout | dropout parameter | 0.5 |
