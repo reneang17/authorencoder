@@ -29,18 +29,18 @@ see results and work locally.
 With this quick start, which trains on the 10 poets with largest corpuses on the data set, one 
 obtains the following embedding:
 
-![training](./media/training.png)
+![training](./media/training.png =20x20)
 
 Then, one can adjust a K nearest neighboors classification algorithm to check the accuracy 
 of the model. On a separate training set solely of poems never seem by the training and valid sets 
 one obtains the following results on these same authors
 
-![testestin](./media/testing.png)
+![testestin](./media/testing.png =20x20)
 
 and the KNN algorithm obtains 51% accuracy. Furthermore, to test is this is really an encoder (embedding)
 for authors not used for training, we use the model to process the vector for another 10 authors
 
-![training_newauthors](./media/training_newauthors.png)
+![training_newauthors](./media/training_newauthors.png =20x20)
 
 Again, a KNN algorithm reaches 30 % accuracy. Future developments, will use largest corpuses and 
 try different word/sensentece embeddings.
