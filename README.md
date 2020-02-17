@@ -4,7 +4,7 @@
 
 Find poetry authors who writes similar to your dearest poems.
 
-Would it be great if,  after reading a touching poem, we could find authors who have similar ideas or style? To this end, I build a scalable recommendation system that takes  as input a poem and outputs authors that write similarly. Bookshops can scale this service to empower their customers, boosting sales and loyalty. The underlying AI results from applying computer vision techniques  to encode the legacy of a hundred of classic and modern poets. 
+Would it be great if,  after reading a touching poem, we could find authors who have similar ideas or style? To this end, I built a scalable recommendation system that takes  as input a poem and outputs authors that write similarly. Bookshops can scale this service to empower their customers, boosting sales and loyalty. The underlying AI results from applying computer vision techniques  to encode the legacy of a hundred of classic and modern poets. 
 
 ## How does it work?
 
@@ -26,8 +26,24 @@ Use the docker file in the build folder, execute run_pipeline and go to /src/res
 see results and work locally.
 
 ## Performance
+With this quick start, which trains on the 10 poets with largest corpuses on the data set, one 
+obtains the following embedding:
 
-The present encoder is build with the 10 authors which produces the larges corpus of poems. 
+![training](./media/training.png)
+
+Then, one can adjust a K nearest neighboors classification algorithm to check the accuracy 
+of the model. On a separate training set solely of poems never seem by the training and valid sets 
+one obtains the following results on these same authors
+
+![testestin](./media/testing.png)
+
+and the KNN algorithm obtains 51% accuracy. Furthermore, to test is this is really an encoder (embedding)
+for authors not used for training, we use the model to process the vector for another 10 authors
+
+![training_newauthors](./media/training_newauthors.png)
+
+Again, a KNN algorithm reaches 30 % accuracy. Future developments, will use largest corpuses and 
+try different word/sensentece embeddings.
 
 ---
 ## Parameters process poems
@@ -83,6 +99,7 @@ FaceNet: A Unified Embedding for Face Recognition and Clustering (https://arxiv.
 The triplet loss tools used are based on [Adam Bielski](https://github.com/adambielski/siamese-triplet) 
 pytorch implementation of triplet loss.
 The best performing model is an implementation of [CNN for sentence classification](https://arxiv.org/abs/1408.5882)
+
 
 
 
