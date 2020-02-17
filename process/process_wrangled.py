@@ -139,7 +139,7 @@ def split_train_test(df, authors=MAX_LIST,  frac = 0.90):
         df_train = df_train.append(train)
         df_test = df_test.append(test)
     return df_train, df_test
-df_train, df_test = split_train_test(df, authors=MAX_LIST,  frac = 0.90)
+df_train, df_test = split_train_test(df, authors=MAX_LIST,  frac = TRAIN_TEST_RATIO)
 df_train=split_poems(df_train)
 df_test=split_poems(df_test)
 
