@@ -46,6 +46,9 @@ parser.add_argument('--max_authors', type=int, default = 10,
 parser.add_argument('--min_authors', type=int, default = 0,
                         help="Keep authors with larges corpus starting from (default: 0)")
 
+parser.add_argument('--train_test_ratio', type=float, default = 0.9,
+                        help="Train test ratio (default: 0.9)")
+
 parser.add_argument('--seed', type=int, default = 1234,
                         help="Seed for replicability (default: 1234)")
 
@@ -64,6 +67,7 @@ NO_WHITE_SPACE = args.no_white_space
 NO_NEWLINES = args.no_newlines
 MAX_AUTHORS = args.max_authors
 MIN_AUTHORS = args.min_authors
+TRAIN_TEST_RATIO = args.train_test_ratio
 SEED = args.seed
 
 if not os.path.exists(process_dir): # Make sure that the folder exists
@@ -135,7 +139,7 @@ def split_train_test(df, authors=MAX_LIST,  frac = 0.90):
         df_train = df_train.append(train)
         df_test = df_test.append(test)
     return df_train, df_test
-df_train, df_test = split_train_test(df, authors=MAX_LIST,  frac = 0.90)
+df_train, df_test = split_train_test(df, authors=MAX_LIST,  frac = TRAIN_TEST_RATIO)
 df_train=split_poems(df_train)
 df_test=split_poems(df_test)
 
