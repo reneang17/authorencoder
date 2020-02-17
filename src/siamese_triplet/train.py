@@ -31,7 +31,6 @@ def simplified_fit(train_loader, val_loader, model, loss_fn, optimizer, n_epochs
         for metric in _metrics:
             message += '\t{}: {}'.format(metric.name(), metric.value())
             train_list.append(metric.value())
-        print(message)
 
 
         # Validation stage
@@ -42,7 +41,7 @@ def simplified_fit(train_loader, val_loader, model, loss_fn, optimizer, n_epochs
             for metric in _metrics:
                 message += '\t{}: {}'.format(metric.name(), metric.value())
                 valid_list.append(metric.value())
-            print(message) 
+        print(message) 
 
     return (train_list, valid_list)
 
