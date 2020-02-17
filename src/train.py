@@ -76,8 +76,8 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
     # Training Parameters
-    parser.add_argument('--epochs', type=int, default=15,
-                        help='number of epochs to train (default: 1)')
+    parser.add_argument('--epochs', type=int, default=20,
+                        help='number of epochs to train (default: 20)')
     parser.add_argument('--seed', type=int, default=1234,
                         help='random seed (default: 1)')
     parser.add_argument('--dropout', type=float, default=0.5,

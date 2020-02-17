@@ -33,7 +33,6 @@ def simplified_fit(train_loader, val_loader, model, loss_fn, optimizer, n_epochs
             train_list.append(metric.value())
 
 
-
         # Validation stage
         if val_loader != None:
             val_loss, _metrics = test_epoch(val_loader, model, loss_fn, is_cuda_available, metrics)
@@ -42,7 +41,7 @@ def simplified_fit(train_loader, val_loader, model, loss_fn, optimizer, n_epochs
             for metric in _metrics:
                 message += '\t{}: {}'.format(metric.name(), metric.value())
                 valid_list.append(metric.value())
-        
+        print(message) 
 
     return (train_list, valid_list)
 
