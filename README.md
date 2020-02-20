@@ -36,21 +36,21 @@ obtains the following embedding:
 ![training](./media/training.png)
 
 Then, one can adjust a K nearest neighboors classification algorithm to check the accuracy 
-of the model. On a separate training set solely of poems never seem by the training and valid sets 
-one obtains the following results on these same authors
+of the model. On a separate training set solely of poems, never seem by the training and validation sets,
+still recognizes authoship
 
 ![testestin](./media/testing.png)
 
-and the KNN algorithm obtains 51% accuracy. Furthermore, to test is this is really an encoder (embedding)
-for authors not used for training, we use the model to process the vector for another 10 authors
+reachign a 51% accuracy with teh KNN previously fitted. Furthermore, to test is this is really an encoder (embedding)
+not just for new poems but for NEW AUTHORS, we use the model to embbed another 10 different authors
 
 ![training_newauthors](./media/training_newauthors.png)
 
-Again, a KNN algorithm reaches 30 % accuracy. Future developments, will use largest corpuses and 
-try different word/sensentece embeddings.
+Again, this time the accuracy of a KNN classifier deacreases to 30 %. Future developments, will use largest corpuses and 
+try different word/sensentece/ to preprocess authors corpuses. 
 
 ---
-## Parameters process poems
+## Parameters of poems processing
 
 processing_wrangle.py takes clean data and 
 
@@ -69,7 +69,7 @@ processing_wrangle.py takes clean data and
 |--train_test_ratio | Train test ratio | 0.9 |
 |--seed | Seed for replicability | 1234 |
 
-## Parameters create word embedding, dictionary and tokenize poems
+## Parameters to create the GLOVE word embedding, dictionary and tokenize poems
 
 | Parameter  | Description | Default |
 | ------------- | ------------- | ------------- |
@@ -82,7 +82,7 @@ processing_wrangle.py takes clean data and
 | --seed | Seed for replicability | 1234 |
 
 
-## Parameters modelling
+## Parameters of the CNN based architecture
 
 | Parameter  | Description | Default |
 | ------------- | ------------- | ------------- |
