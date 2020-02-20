@@ -18,10 +18,10 @@ RUN apt-get update; \
 
     pip3 install -U spacy ; \
 
-    python3 -m spacy download en_core_web_sm
+    python3 -m spacy download en
 
 RUN apt-get install python3-tk -y
 
-COPY ./ /usr/local/authoencoder
+COPY ../ /usr/local/authoencoder
 
 WORKDIR /usr/local/authoencoder
