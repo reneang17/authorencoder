@@ -35,6 +35,10 @@ obtains the following embedding:
 
 ![training](./media/training.png)
 
+<p align="center">
+  <img  src="./media/training.png">
+</p>
+
 Then, one can adjust a K nearest neighboors classification algorithm to check the accuracy 
 of the model. On a separate training set solely of poems, never seem by the training and validation sets,
 still recognizes authoship
