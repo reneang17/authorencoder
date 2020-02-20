@@ -33,8 +33,6 @@ see results and work locally.
 With this quick start, which trains on the 10 poets with largest corpuses on the data set, one 
 obtains the following embedding:
 
-![training](./media/training.png)
-
 <p align="center">
   <img  src="./media/training.png">
 </p>
@@ -43,12 +41,17 @@ Then, one can adjust a K nearest neighboors classification algorithm to check th
 of the model. On a separate training set solely of poems, never seem by the training and validation sets,
 still recognizes authoship
 
-![testestin](./media/testing.png)
+<p align="center">
+  <img  src="./media/testing.png">
+</p>
 
 reachign a 51% accuracy with teh KNN previously fitted. Furthermore, to test is this is really an encoder (embedding)
 not just for new poems but for NEW AUTHORS, we use the model to embbed another 10 different authors
 
-![training_newauthors](./media/training_newauthors.png)
+<p align="center">
+  <img  src="./media/training_newauthors.png">
+</p>
+
 
 Again, this time the accuracy of a KNN classifier deacreases to 30 %. Future developments, will use largest corpuses and 
 try different word/sensentece/ to preprocess authors corpuses. 
