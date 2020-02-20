@@ -9,9 +9,13 @@ Would it be great if,  after reading a touching poem, we could find authors who 
 ## How does it work?
 
 Tipically, recomendation systems are based on what other people like. Instead, AuthorEncoder makes recomendations based on 
-on the poems themselfs. How is this possible? you might be asking. The answer is bringing the triple tecnique of [FaceNet: A Unified Embedding for Face Recognition and Clustering](https://arxiv.org/abs/1503.03832) to natural language processing. Precisely, we wrangle and process poems, which are them used to build an authorencoder that multiple authors, which in turn can be used to give recomendation once the embedding itself. Run the main file to build this project yourself. 
+on the poems themselfs. How is this possible? you might be asking. The answer is bringing the triple tecnique of [FaceNet: A Unified Embedding for Face Recognition and Clustering](https://arxiv.org/abs/1503.03832) to natural language processing.
+
+Precisely, we wrangled and processed poems. Several processing options were tried and there were plenty of challenges with the data set in particular: different languange, anonymous authors, multiple editions, old-fashion English, etc. The arquitecture that optimized best the model was a GLOVE embedding followed by a series of convolutional and pool layers. We also used seqeunce models as GRU adn LSTM but the increase in accuracy was marginal at a large cost in speed. 
 
 ## AuthorEncoder in action
+
+The files to deploy and serve this project on SageMaker and included on /src/sagemaker. We used a rest API and a lambda function. Then build a html website which can be executed locally or uploaded to a server. Here is an example:
 
 ![](./media/how_it_works.gif)
 

@@ -12,14 +12,16 @@ RUN apt-get update; \
 
     python3 get-pip.py ; \
 
-    pip3 install requirements.txt ; \
+    pip3 install -U scikit-learn ; \
+
+    pip3 install torch torchtext matplotlib seaborn; \
 
     pip3 install -U spacy ; \
 
-    python3 -m spacy download en_core_web_sm
+    python3 -m spacy download en
 
 RUN apt-get install python3-tk -y
 
-COPY resources /Users/rene/work/docker_authorencoder/authorencoder
+COPY ../ /usr/local/authoencoder
 
 WORKDIR /usr/local/authoencoder
