@@ -106,7 +106,8 @@ processing_wrangle.py takes clean data and
 
 ## References
 
-FaceNet: A Unified Embedding for Face Recognition and Clustering (https://arxiv.org/pdf/1503.03832.pdf)
+FaceNet: A Unified Embedding for Face Recognition and Clustering (https://arxiv.org/pdf/1503.03832.pdf), also 
+see https://arxiv.org/pdf/1703.07737.pdf and https://omoindrot.github.io/triplet-loss)
 The triplet loss tools used are based on [Adam Bielski](https://github.com/adambielski/siamese-triplet) 
 pytorch implementation of triplet loss.
 The best performing model is an implementation of [CNN for sentence classification](https://arxiv.org/abs/1408.5882)
