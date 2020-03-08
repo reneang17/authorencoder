@@ -45,7 +45,7 @@ still recognizes authoship
   <img  src="./media/testing.png">
 </p>
 
-reachign a 51% accuracy with teh KNN previously fitted. Furthermore, to test is this is really an encoder (embedding)
+reachign a 34% balanced accuracy with the KNN previously fitted. Furthermore, to test is this is really an encoder (embedding)
 not just for new poems but for NEW AUTHORS, we use the model to embbed another 10 different authors
 
 <p align="center">
@@ -53,7 +53,7 @@ not just for new poems but for NEW AUTHORS, we use the model to embbed another 1
 </p>
 
 
-Again, this time the accuracy of a KNN classifier deacreases to 30 %. Future developments, will use largest corpuses and 
+Again, this time the balanced accuracy of a KNN classifier deacreases to 22 %. Future developments, will use largest corpuses and 
 try different word/sensentece/ to preprocess authors corpuses. 
 
 ---
@@ -106,7 +106,8 @@ processing_wrangle.py takes clean data and
 
 ## References
 
-FaceNet: A Unified Embedding for Face Recognition and Clustering (https://arxiv.org/pdf/1503.03832.pdf)
+FaceNet: A Unified Embedding for Face Recognition and Clustering (https://arxiv.org/pdf/1503.03832.pdf), also 
+see https://arxiv.org/pdf/1703.07737.pdf and https://omoindrot.github.io/triplet-loss)
 The triplet loss tools used are based on [Adam Bielski](https://github.com/adambielski/siamese-triplet) 
 pytorch implementation of triplet loss.
 The best performing model is an implementation of [CNN for sentence classification](https://arxiv.org/abs/1408.5882)
